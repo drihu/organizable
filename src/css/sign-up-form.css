@@ -1,8 +1,26 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif, monospace;
+}
+
+header{
+  background: #58595A;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+}
+
+header span{
+  color: rgb(153, 155, 158)
+}
+
 .form{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: #F4F5F7;
   width: 412px;
   margin: auto;
+  margin-top: 82px;
 }
 
 .form form{
