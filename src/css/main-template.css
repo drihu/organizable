@@ -25,6 +25,7 @@ main {
   background: #E5E5E5;
   display: flex;
   min-height: 100vh;
+  padding-right: 10%;
 }
 
 .header span{
@@ -34,9 +35,9 @@ main {
 /*LEFT-SIDEBAR*/
 
 .nav-bar {
-  min-width: 240px;
+  min-width: 13%;
   height: 100vh;
-  margin-left: 270px;
+  margin-left: 12%;
   margin-right: 29px;
   padding-top: 32px;
 }
