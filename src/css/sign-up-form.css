@@ -73,11 +73,9 @@ header span{
 }
 
 .profile-wrapper{
-  border: 1px solid darkblue;
   height: 90vh;
   display: flex;
-  justify-content: space-between;
-  padding: 35px 0px 0 220px;
+  padding: 35px 0 0 15%;
 }
 
 .profile-wrapper .form{
@@ -118,4 +116,5 @@ header span{
   width: 850px;
   display: flex;
   flex-wrap: wrap;
+  margin-left: 13%;
 }
