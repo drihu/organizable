@@ -18,6 +18,7 @@ form.addEventListener('submit', (e) => {
         console.log(json.errors.message);
       } else {
         localStorage.setItem('token', json.token);
+        localStorage.setItem('user', JSON.stringify(json));
         window.location.replace('my-boards.html');
       }
     });
