@@ -1,0 +1,110 @@
+/* MAIN SECTION*/
+
+.boards-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.boards-subsection {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.subsection__title {
+  margin-left: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #172B4D;
+}
+
+.boards-wrapper {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.board {
+  background-color: #172B4D;
+  width: 190px;
+  height: 96px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  color: #ffffff;
+}
+
+.board__content {
+  margin: 8px;
+  word-break: break-all;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: auto;
+}
+
+.board__options {
+  margin-top: auto;
+  justify-self: flex-end;
+  align-self: flex-end;
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+.yellow {
+  color: #C3BE0E;
+}
+
+.create-board__button {
+  width: 190px;
+  height: 96px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F2F5;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #172B4D;
+}
+
+.create-board__button:hover {
+  cursor: pointer;
+}
+
+.new-board {
+
+}
+
+.new-board__form {
+
+}
+
+.new-board__input {
+
+}
+
+.window__icon-close {
+
+}
+
+.new-board__submit {
+
+}
+
+.palette-colors {
+
+}
+
+.color {
+
+}
+
+.hidden {
+  display: none;
+}
