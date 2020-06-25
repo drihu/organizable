@@ -18,8 +18,9 @@ header span{
 .form{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: #F4F5F7;
-  width: 412px;
   margin: auto;
+  width: 412px;
+  height: fit-content;
   margin-top: 82px;
 }
 
@@ -39,15 +40,82 @@ header span{
 
 .form form button{
   height: 32px;
-  margin: 10px 68px 20px;
+  width: 77px;
   background: #5AAC44;
   border-radius: 3px;
   border: none;
   color: #fff;
 }
 
+.buttons button.unique{
+  margin: auto;
+}
+
 .form form a{
   text-align: center;
   text-decoration: none;
   color: #0079BF;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.buttons .button-edit{
+  background: #EBECF0;
+  color: #172B4D;
+}
+
+.buttons .button-delete{
+  background: #CF513D;
+}
+
+.profile-wrapper{
+  border: 1px solid darkblue;
+  height: 90vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 0px 0 220px;
+}
+
+.profile-wrapper .form{
+  margin: 0;
+}
+
+.profile-wrapper .form-profile{
+  margin-top: 70px;
+}
+
+.navbar{
+  width: 240px;
+}
+
+.navbar li{
+  border: none;
+  width: 240px;
+  height: 32px;
+  margin: 5px 0;
+  font-size: 14px;
+  padding-left: 32px;
+  line-height: 32px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.navbar a{
+  text-decoration: none;
+  color: #0079BF;
+}
+
+.navbar .active{
+  background: #E4F0F6;
+}
+
+.container{
+  width: 850px;
+  display: flex;
+  flex-wrap: wrap;
 }
