@@ -23,22 +23,24 @@
     </div>
     <div class="container">
       <div class="form form-profile">
-        <form>
+        <form id="profile-form">
           <label for="username">Username</label>
-          <input id="username" type="text">
+          <input id="username" type="text" disabled>
           <label for="email">Email</label>
-          <input id="email" type="email">
+          <input id="email" type="email" disabled>
           <label for="firstname">First Name</label>
-          <input id="firstname" type="text">
+          <input id="firstname" type="text" disabled>
           <label for="lastname">Last Name</label>
-          <input id="lastname" type="text">
+          <input id="lastname" type="text" disabled>
           <div class="buttons">
-            <button class="button-edit">Edit</button>
-            <button class="button-delete">Delete</button>
+            <button class="button-edit" id="edit">Edit</button>
+            <button class="button-delete" id="delete">Delete</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+
+  <script src="./js/profile.js"></script>
 </body>
 </html>
