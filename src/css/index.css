@@ -32,6 +32,8 @@
   width: 190px;
   height: 96px;
   border-radius: 3px;
+  margin-right: 16px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -48,11 +50,19 @@
 }
 
 .board__options {
+  display: flex;
   margin-top: auto;
   justify-self: flex-end;
   align-self: flex-end;
+  width: 32px;
+  justify-content: space-between;
   margin-right: 12px;
   margin-bottom: 12px;
+}
+
+.board__options i {
+  width: 12px;
+  height: 12px;
 }
 
 .yellow {
