@@ -5,12 +5,10 @@ form.addEventListener('submit', (e) => {
   const username = e.target.username.value;
   const password = e.target.password.value;
 
-  fetch('http://127.0.0.1:3000/login', {
+  fetch('http://localhost:3000/login', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
-    headers:{
-      'Content-Type': 'application/json',
-    }
   })
     .then((res) => res.json())
     .then((json) => {
