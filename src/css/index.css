@@ -178,3 +178,7 @@
 .hidden {
   display: none;
 }
+
+.none {
+  visibility: hidden !important;
+}

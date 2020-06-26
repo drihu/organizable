@@ -80,7 +80,7 @@ function starBoard() {
   const boardOptions = starredBoard.querySelector(".board__options");
   const closeIcon = boardOptions.children[0];
   const starIcon = boardOptions.children[1];
-  closeIcon.classList.add("hidden");
+  closeIcon.classList.add("none");
   starIcon.classList.add("yellow");
   starredBoards.append(starredBoard);
   board.remove();
@@ -94,7 +94,7 @@ function unstarBoard() {
   const closeIcon = boardOptions.children[0];
   const starIcon = boardOptions.children[1];
   boardOptions.classList.add("hidden");
-  closeIcon.classList.remove("hidden");
+  closeIcon.classList.remove("none");
   starIcon.classList.remove("yellow");
   //closeIcon.addEventListener("click", closeBoard);
   regularBoard.addEventListener("mouseover", showBoardIcons);
