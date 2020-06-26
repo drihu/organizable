@@ -17,6 +17,7 @@ function showModal() {
 function setModalBoard() {
   setColors();
   addSubmitData();
+  getBoards();
   const closeIcon = newBoardCard.querySelector(".window__icon-close");
   closeIcon.addEventListener("click", closeModal);
 }
@@ -35,37 +36,81 @@ function changeColor() {
 
 function closeModal() {
   newBoardLayout.classList.add("hidden");
-  form.reset();
+  //console.log(newBoardCard.children[0]);
+  //newBoardCard.children[0].reset();
 }
 
 function addSubmitData() {
-  const submitButton = document.querySelector(".new-board__submit");
   const formNewBoard = document.querySelector(".new-board__form"); 
   formNewBoard.addEventListener("submit", (event) => {
     event.preventDefault();
-    form = event.target;
-    console.log(form);
-    newBoardContent = form.children[0].children[0].value;
-    console.log(newBoardContent);
-    //postBoardData();
-    createBoard(form, newBoardContent);
+    const formInput = event.target.children[0];
+    const color = window.getComputedStyle(formInput).backgroundColor;
+    const name = formInput.children[0].value;
+    const userId = JSON.parse(localStorage.user).id;
+    const boardData = {color, name, userId}; 
+    //console.log(newBoardContent);
+    postBoardData(boardData);
+    createBoard(boardData);
   });
 }
 
-function postBoardData() {
-  
+function getBoards() {
+  const boards = fetch("http://localhost:3000/boards", {
+    method: 'GET',
+    headers: { 'Authorization': `Token token=${localStorage.token}` }
+  }).then((response) => response.json())
+    //.then((data) => JSON.parse(data.))
+    .then((boards) => { 
+      boards.forEach((board) => {
+      board.starred ? createStarredBoard(board) : createBoard(board);
+      })
+    });
+  console.log("termino");   
 }
 
-function createBoard(form, content) {
+function postBoardData(boardData) {
+  fetch("http://localhost:3000/boards", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token token=${localStorage.token}`
+    },
+    body: JSON.stringify({
+      board: {
+        user_id : boardData.userId,
+        name: boardData.name,
+        color: boardData.color
+      }
+    }),
+  });
+}
+
+function createStarredBoard(boardData) {
+  console.log("entro");
   const newBoard = boardTemplate.cloneNode(true);
-  console.log(newBoard);
-  const newBoardOptions = newBoard.querySelector(".board__options")
+  newBoard.style.background = boardData.color;
+  newBoard.children[0].textContent = boardData.name;
+  const boardOptions = newBoard.querySelector(".board__options");
+  const closeIcon = boardOptions.children[0];
+  const starIcon = boardOptions.children[1];
+  starIcon.dataset.boardId = boardData.board_id; 
+  newBoard.classList.remove("hidden");
+  boardOptions.classList.remove("hidden");
+  closeIcon.classList.add("none");
+  starIcon.classList.add("yellow");
+  starIcon.addEventListener("click", unstarBoard);
+  starredBoards.append(newBoard);
+}
+
+function createBoard(boardData) {
+  const newBoard = boardTemplate.cloneNode(true);
+  newBoard.style.background = boardData.color;
+  newBoard.children[0].textContent = boardData.name;
+  const newBoardOptions = newBoard.querySelector(".board__options");
   const closeIcon = newBoardOptions.children[0];
   const starIcon = newBoardOptions.children[1];
   newBoard.classList.remove("hidden");
-  const formInput = form.children[0];
-  newBoard.style.background = window.getComputedStyle(formInput).background;
-  newBoard.children[0].textContent = content; 
   //closeIcon.addEventListener("click", closeBoard);
   newBoard.addEventListener("mouseover", showBoardIcons);
   newBoard.addEventListener("mouseout", hideBoardIcons);
@@ -73,7 +118,7 @@ function createBoard(form, content) {
   myBoards.append(newBoard);
   closeModal();
 }
-
+  
 function starBoard() {
   const board = this.parentElement.parentElement;
   const starredBoard = board.cloneNode(true);
@@ -82,9 +127,9 @@ function starBoard() {
   const starIcon = boardOptions.children[1];
   closeIcon.classList.add("none");
   starIcon.classList.add("yellow");
+  starIcon.addEventListener("click", unstarBoard);
   starredBoards.append(starredBoard);
   board.remove();
-  starIcon.addEventListener("click", unstarBoard); 
 }
 
 function unstarBoard() {
@@ -96,7 +141,6 @@ function unstarBoard() {
   boardOptions.classList.add("hidden");
   closeIcon.classList.remove("none");
   starIcon.classList.remove("yellow");
-  //closeIcon.addEventListener("click", closeBoard);
   regularBoard.addEventListener("mouseover", showBoardIcons);
   regularBoard.addEventListener("mouseout", hideBoardIcons);
   starIcon.addEventListener("click", starBoard);
