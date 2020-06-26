@@ -1,7 +1,7 @@
 const boardTemplate = document.querySelector(".board");
 const boardsSection = document.querySelector(".boards-section") 
 const starredBoards = boardsSection.children[0].children[1];
-const myBoardsContainer = boardsSection.children[1].children[1];
+const myBoards = boardsSection.children[1].children[1];
 const newBoardLayout = document.querySelector(".bg-layout"); 
 const newBoardCard = newBoardLayout.querySelector(".new-board__input");
 
@@ -67,12 +67,43 @@ function createBoard(form, content) {
   newBoard.style.background = window.getComputedStyle(formInput).background;
   newBoard.children[0].textContent = content; 
   //closeIcon.addEventListener("click", closeBoard);
-  //starIcon.addEventListener("click", starBoard);
   newBoard.addEventListener("mouseover", showBoardIcons);
   newBoard.addEventListener("mouseout", hideBoardIcons);
-  myBoardsContainer.append(newBoard);
+  starIcon.addEventListener("click", starBoard);
+  myBoards.append(newBoard);
   closeModal();
 }
+
+function starBoard() {
+  const board = this.parentElement.parentElement;
+  const starredBoard = board.cloneNode(true);
+  const boardOptions = starredBoard.querySelector(".board__options");
+  const closeIcon = boardOptions.children[0];
+  const starIcon = boardOptions.children[1];
+  closeIcon.classList.add("hidden");
+  starIcon.classList.add("yellow");
+  starredBoards.append(starredBoard);
+  board.remove();
+  starIcon.addEventListener("click", unstarBoard); 
+}
+
+function unstarBoard() {
+  const board = this.parentElement.parentElement;
+  const regularBoard = board.cloneNode(true);
+  const boardOptions = regularBoard.querySelector(".board__options");
+  const closeIcon = boardOptions.children[0];
+  const starIcon = boardOptions.children[1];
+  boardOptions.classList.add("hidden");
+  closeIcon.classList.remove("hidden");
+  starIcon.classList.remove("yellow");
+  //closeIcon.addEventListener("click", closeBoard);
+  regularBoard.addEventListener("mouseover", showBoardIcons);
+  regularBoard.addEventListener("mouseout", hideBoardIcons);
+  starIcon.addEventListener("click", starBoard);
+  myBoards.append(regularBoard);
+  board.remove();
+}
+
 
 function showBoardIcons() {
   const boardOptions = this.querySelector(".board__options");
