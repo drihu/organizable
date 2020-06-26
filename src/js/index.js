@@ -94,7 +94,7 @@ function createStarredBoard(boardData) {
   const boardOptions = newBoard.querySelector(".board__options");
   const closeIcon = boardOptions.children[0];
   const starIcon = boardOptions.children[1];
-  starIcon.dataset.boardId = boardData.board_id; 
+  starIcon.dataset.boardID = boardData.id; 
   newBoard.classList.remove("hidden");
   boardOptions.classList.remove("hidden");
   closeIcon.classList.add("none");
@@ -110,6 +110,7 @@ function createBoard(boardData) {
   const newBoardOptions = newBoard.querySelector(".board__options");
   const closeIcon = newBoardOptions.children[0];
   const starIcon = newBoardOptions.children[1];
+  starIcon.dataset.boardID = boardData.id;
   newBoard.classList.remove("hidden");
   //closeIcon.addEventListener("click", closeBoard);
   newBoard.addEventListener("mouseover", showBoardIcons);
@@ -130,6 +131,10 @@ function starBoard() {
   starIcon.addEventListener("click", unstarBoard);
   starredBoards.append(starredBoard);
   board.remove();
+  const boardID = parseInt(starIcon.dataset.boardID);
+  console.log(boardID);
+  const starredStatus = true;
+  updateBoardStatus(boardID, starredStatus);
 }
 
 function unstarBoard() {
@@ -146,8 +151,26 @@ function unstarBoard() {
   starIcon.addEventListener("click", starBoard);
   myBoards.append(regularBoard);
   board.remove();
+  const boardID = parseInt(starIcon.dataset.boardID);
+  console.log(boardID);
+  const starredStatus = false;
+  updateBoardStatus(boardID, starredStatus);
 }
 
+function updateBoardStatus(boardID, status) {
+  fetch(`http://localhost:3000/boards/${boardID}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token token=${localStorage.token}`,
+    },
+    body: JSON.stringify({
+      board: {
+        starred : status
+      },
+    })
+  });
+}
 
 function showBoardIcons() {
   const boardOptions = this.querySelector(".board__options");
