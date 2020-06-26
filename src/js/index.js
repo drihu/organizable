@@ -1,8 +1,8 @@
 const boardTemplate = document.querySelector(".board");
-const boardsSection = document.querySelector(".boards-section") 
+const boardsSection = document.querySelector(".boards-section")
 const starredBoards = boardsSection.children[0].children[1];
 const myBoards = boardsSection.children[1].children[1];
-const newBoardLayout = document.querySelector(".bg-layout"); 
+const newBoardLayout = document.querySelector(".bg-layout");
 const newBoardCard = newBoardLayout.querySelector(".new-board__input");
 
 function clickCreateButton() {
@@ -41,14 +41,14 @@ function closeModal() {
 }
 
 function addSubmitData() {
-  const formNewBoard = document.querySelector(".new-board__form"); 
+  const formNewBoard = document.querySelector(".new-board__form");
   formNewBoard.addEventListener("submit", (event) => {
     event.preventDefault();
     const formInput = event.target.children[0];
     const color = window.getComputedStyle(formInput).backgroundColor;
     const name = formInput.children[0].value;
     const userId = JSON.parse(localStorage.user).id;
-    const boardData = {color, name, userId}; 
+    const boardData = {color, name, userId};
     //console.log(newBoardContent);
     postBoardData(boardData);
     createBoard(boardData);
@@ -60,13 +60,13 @@ function getBoards() {
     method: 'GET',
     headers: { 'Authorization': `Token token=${localStorage.token}` }
   }).then((response) => response.json())
-    //.then((data) => JSON.parse(data.))
-    .then((boards) => { 
+    .then((boards) => boards.filter((board) => !board.closed))
+    .then((boards) => {
       boards.forEach((board) => {
       board.starred ? createStarredBoard(board) : createBoard(board);
       })
     });
-  console.log("termino");   
+  console.log("termino");
 }
 
 function postBoardData(boardData) {
@@ -94,7 +94,7 @@ function createStarredBoard(boardData) {
   const boardOptions = newBoard.querySelector(".board__options");
   const closeIcon = boardOptions.children[0];
   const starIcon = boardOptions.children[1];
-  starIcon.dataset.boardID = boardData.id; 
+  starIcon.dataset.boardID = boardData.id;
   newBoard.classList.remove("hidden");
   boardOptions.classList.remove("hidden");
   closeIcon.classList.add("none");
@@ -112,14 +112,31 @@ function createBoard(boardData) {
   const starIcon = newBoardOptions.children[1];
   starIcon.dataset.boardID = boardData.id;
   newBoard.classList.remove("hidden");
-  //closeIcon.addEventListener("click", closeBoard);
+  closeIcon.addEventListener("click", () => closeBoard(boardData.id, newBoard));
   newBoard.addEventListener("mouseover", showBoardIcons);
   newBoard.addEventListener("mouseout", hideBoardIcons);
   starIcon.addEventListener("click", starBoard);
   myBoards.append(newBoard);
   closeModal();
 }
-  
+
+function closeBoard(boardID, board) {
+  fetch(`http://localhost:3000/boards/${boardID}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token token=${localStorage.token}`,
+    },
+    body: JSON.stringify({
+      board: { closed : true },
+    })
+  })
+    .then((res) => res.json())
+    .then(() => {
+      board.remove();
+    });
+}
+
 function starBoard() {
   const board = this.parentElement.parentElement;
   const starredBoard = board.cloneNode(true);
@@ -179,7 +196,7 @@ function showBoardIcons() {
 
 function hideBoardIcons() {
   const boardOptions = this.querySelector(".board__options");
-  boardOptions.classList.add("hidden"); 
+  boardOptions.classList.add("hidden");
 }
 
 setModalBoard();
