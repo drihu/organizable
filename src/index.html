@@ -9,6 +9,7 @@
   <title>My boards</title>
 </head>
 <body>
+  
   <header class="header">
     <h1>{ organiz<span>able</span> }</h1>
   </header>
@@ -29,72 +30,16 @@
       <div class="boards-subsection">
         <p class="subsection__title"><span class="fa fa-star-o"></span> Your Starred Boards</p>
         <div class="boards-wrapper">
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
-          <div class="board">
-            <p class="board__content">Codeable</p>
-            <div class= "board__options">
-            <i class="icon-close"></i>
-            <i class="fa fa-star-o yellow"></i>
-            </div>
-          </div>
         </div>
       </div>
       <div class="boards-subsection">
         <p class="subsection__title"><span>{ }</span> Your Boards</p>
         <div class="boards-wrapper">
-          <div class="board">
+          <div class="board hidden">
             <p class="board__content">Codeable</p>
-            <div class= "board__options ">
-            <i class="fa fa-window-close-o"></i>
-            <i class="fa fa-star-o"></i>
+            <div class= "board__options hidden">
+              <i class="fa fa-window-close-o"></i>
+              <i class="fa fa-star-o"></i>
             </div>
           </div>
         </div>
@@ -102,31 +47,35 @@
       <div class="create-board__button">
         <p>Create a new Board</p>
       </div>
-      <div class="new-board hidden">
-        <form action="#" class="new-board__form" method="POST">
-          <div class="new-board__input">
-            <input type="text" placeholder="Board title">
-            <i class="window__icon-close"></i>
-          </div>
-          <input class="new-board__submit" type="submit" name="Create Board">
-        </form>
-        <div class="palette-colors hidden">
-          <div class="color blue" data-color="#0079BF"></div>
-          <div class="color mustard" data-color="#D29034"></div>
-          <div class="color dark-green" data-color="#519839"></div>
-          <div class="color red" data-color="#B04632"></div>
-          <div class="color purple" data-color="#89609E"></div>
-          <div class="color pink" data-color="#CD5A90"></div>
-          <div class="color green" data-color="#4BBF6B"></div>
-          <div class="color light-blue" data-color="#0AAECB"></div>
-          <div class="color grey" data-color="#838C90"></div>
-        </div>
-      </div>
+      
     </section>
   </main>
 
+  <div class="bg-layout hidden">
+    <div class="new-board">
+      <form action="#" class="new-board__form" method="POST">
+        <div class="new-board__input">
+          <input type="text" placeholder="Board title">
+          <i class="window__icon-close fa fa-times"></i>
+        </div>
+        <input class="new-board__submit" type="submit" value="Create Board">
+      </form>
+      <div class="palette-colors">
+        <div class="color blue" data-color="#0079BF"></div>
+        <div class="color mustard" data-color="#D29034"></div>
+        <div class="color dark-green" data-color="#519839"></div>
+        <div class="color red" data-color="#B04632"></div>
+        <div class="color purple" data-color="#89609E"></div>
+        <div class="color pink" data-color="#CD5A90"></div>
+        <div class="color green" data-color="#4BBF6B"></div>
+        <div class="color light-blue" data-color="#0AAECB"></div>
+        <div class="color grey" data-color="#838C90"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="./js/authenticate.js"></script>
-  <script src="./js/logout.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>
 
