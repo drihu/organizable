@@ -36,8 +36,8 @@ function changeColor() {
 
 function closeModal() {
   newBoardLayout.classList.add("hidden");
-  //console.log(newBoardCard.children[0]);
-  //newBoardCard.children[0].reset();
+  const form = newBoardLayout.children[0].children[0];
+  form.reset();
 }
 
 function addSubmitData() {
@@ -49,7 +49,6 @@ function addSubmitData() {
     const name = formInput.children[0].value;
     const userId = JSON.parse(localStorage.user).id;
     const boardData = {color, name, userId};
-    //console.log(newBoardContent);
     postBoardData(boardData);
     createBoard(boardData);
   });
@@ -66,7 +65,6 @@ function getBoards() {
       board.starred ? createStarredBoard(board) : createBoard(board);
       })
     });
-  console.log("termino");
 }
 
 function postBoardData(boardData) {
@@ -87,7 +85,6 @@ function postBoardData(boardData) {
 }
 
 function createStarredBoard(boardData) {
-  console.log("entro");
   const newBoard = boardTemplate.cloneNode(true);
   newBoard.style.background = boardData.color;
   newBoard.children[0].textContent = boardData.name;
@@ -149,7 +146,6 @@ function starBoard() {
   starredBoards.append(starredBoard);
   board.remove();
   const boardID = parseInt(starIcon.dataset.boardID);
-  console.log(boardID);
   const starredStatus = true;
   updateBoardStatus(boardID, starredStatus);
 }
@@ -169,7 +165,6 @@ function unstarBoard() {
   myBoards.append(regularBoard);
   board.remove();
   const boardID = parseInt(starIcon.dataset.boardID);
-  console.log(boardID);
   const starredStatus = false;
   updateBoardStatus(boardID, starredStatus);
 }
